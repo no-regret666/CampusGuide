@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex; /* 使用flexbox布局 */
+            align-items: flex-start; /* 顶部对齐 */
+            gap: 40px; /* 添加间距 */
+            text-align: center; /* 统一文本居中 */
+        }
+
+        .map-info {
+            text-align: left; /* 左对齐 */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="map-info">
+        <h1>校园平面图</h1>
+
+        <h2>节点信息</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>节点ID</th>
+                <th>节点名称</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{range .Nodes}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Name}}</td>
+            </tr>
+            {{end}}
+            </tbody>
+        </table>
+
+        <h2>边信息</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>起始节点ID</th>
+                <th>结束节点ID</th>
+                <th>边权重</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{range $startVex, $edges := .Adjacency}}
+            {{range $edges}}
+            <tr>
+                <td>{{$startVex}}</td>
+                <td>{{.EndVex}}</td>
+                <td>{{.Weight}}</td>
+            </tr>
+            {{end}}
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h1>查找最短路径</h1>
+        <form action="/shortestPath" method="POST">
+            <label for="sourceID">起点:</label>
+            <input type="text" id="sourceID" name="sourceID"><br><br>
+            <label for="targetID">终点:</label>
+            <input type="text" id="targetID" name="targetID"><br><br>
+            <input type="hidden" name="_method" value="POST">
+            <input type="submit" value="查找最短路径">
+        </form>
+    </div>
+</div>
+</body>
+</html>

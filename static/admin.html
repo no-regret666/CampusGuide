@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>管理员操作</title>
+    <style>
+        * {
+            transition: .2s;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        select,
+        input[type="number"],
+        input[type="text"] {
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>管理员操作</h1>
+
+    <form action="/admin" method="post">
+        <label for="choice">请选择操作：</label>
+        <select id="choice" name="choice">
+            <option value="1">添加景点</option>
+            <option value="2">添加道路</option>
+            <option value="3">更新地图</option>
+            <option value="4">更新道路</option>
+            <option value="5">删除景点</option>
+            <option value="6">删除道路</option>
+            <option value="0">退出</option>
+        </select>
+        <br><br>
+        <input type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>
